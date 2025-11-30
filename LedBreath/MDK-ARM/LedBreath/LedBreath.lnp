@@ -1,0 +1,22 @@
+--cpu Cortex-M3
+"ledbreath\startup_stm32f103xb.o"
+"ledbreath\main.o"
+"ledbreath\gpio.o"
+"ledbreath\stm32f1xx_it.o"
+"ledbreath\stm32f1xx_hal_msp.o"
+"ledbreath\stm32f1xx_hal_gpio_ex.o"
+"ledbreath\stm32f1xx_hal.o"
+"ledbreath\stm32f1xx_hal_rcc.o"
+"ledbreath\stm32f1xx_hal_rcc_ex.o"
+"ledbreath\stm32f1xx_hal_gpio.o"
+"ledbreath\stm32f1xx_hal_dma.o"
+"ledbreath\stm32f1xx_hal_cortex.o"
+"ledbreath\stm32f1xx_hal_pwr.o"
+"ledbreath\stm32f1xx_hal_flash.o"
+"ledbreath\stm32f1xx_hal_flash_ex.o"
+"ledbreath\stm32f1xx_hal_exti.o"
+"ledbreath\system_stm32f1xx.o"
+--strict --scatter "LedBreath\LedBreath.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "LedBreath.map" -o LedBreath\LedBreath.axf
