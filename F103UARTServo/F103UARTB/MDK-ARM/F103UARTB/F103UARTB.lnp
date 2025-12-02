@@ -1,0 +1,27 @@
+--cpu Cortex-M3
+"f103uartb\startup_stm32f103xb.o"
+"f103uartb\main.o"
+"f103uartb\gpio.o"
+"f103uartb\tim.o"
+"f103uartb\usart.o"
+"f103uartb\stm32f1xx_it.o"
+"f103uartb\stm32f1xx_hal_msp.o"
+"f103uartb\stm32f1xx_hal_gpio_ex.o"
+"f103uartb\stm32f1xx_hal_tim.o"
+"f103uartb\stm32f1xx_hal_tim_ex.o"
+"f103uartb\stm32f1xx_hal.o"
+"f103uartb\stm32f1xx_hal_rcc.o"
+"f103uartb\stm32f1xx_hal_rcc_ex.o"
+"f103uartb\stm32f1xx_hal_gpio.o"
+"f103uartb\stm32f1xx_hal_dma.o"
+"f103uartb\stm32f1xx_hal_cortex.o"
+"f103uartb\stm32f1xx_hal_pwr.o"
+"f103uartb\stm32f1xx_hal_flash.o"
+"f103uartb\stm32f1xx_hal_flash_ex.o"
+"f103uartb\stm32f1xx_hal_exti.o"
+"f103uartb\stm32f1xx_hal_uart.o"
+"f103uartb\system_stm32f1xx.o"
+--strict --scatter "F103UARTB\F103UARTB.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "F103UARTB.map" -o F103UARTB\F103UARTB.axf
