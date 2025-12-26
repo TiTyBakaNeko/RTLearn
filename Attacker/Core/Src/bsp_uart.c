@@ -1,0 +1,61 @@
+#include "bsp_uart.h"
+#include "bsp.h"
+
+#define ENABLE_UART_DMA    1
+
+uint8_t RxTemp = 0;
+uint8_t RxTemp_2 = 0;
+
+
+
+// Initialize USART  初始化串口
+void USART_Init(void)
+{
+    HAL_UART_Receive_IT(&huart3, (uint8_t *)&RxTemp, 1);
+    printf("start serial\n");
+}
+
+// The serial port sends one byte  串口发送一个字节
+void USART3_Send_U8(uint8_t ch)
+{
+    HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, 0xFFFF);
+}
+
+// The serial port sends a string of data  串口发送一串数据
+void USART3_Send_ArrayU8(uint8_t *BufferPtr, uint16_t Length)
+{
+    #if ENABLE_UART_DMA
+    HAL_UART_Transmit_DMA(&huart3, BufferPtr, Length);
+    #else
+    while (Length--)
+    {
+        USART3_Send_U8(*BufferPtr);
+        BufferPtr++;
+    }
+    #endif
+}
+
+// The serial port receiving is interrupted. Procedure  串口接收完成中断
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart == &huart3)
+    {
+        // Continue receiving data  继续接收数据
+        HAL_UART_Receive_IT(&huart3, (uint8_t *)&RxTemp, 1);
+    }
+}
+
+
+
+#ifdef __GNUC__
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif /* __GNUC__ */
+PUTCHAR_PROTOTYPE
+{
+    /* Place your implementation of fputc here */
+    /* e.g. write a character to the EVAL_COM1 and Loop until the end of transmission */
+    HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, 0xFFFF);
+    return ch;
+}
